@@ -34,11 +34,11 @@ class HomeView extends StatelessWidget {
         ),
         body: Center(
           child: ListenableBuilder(
-            listenable: HomeController(),
+            listenable: homeController,
             builder: (context, _) => ListView.builder(
               itemCount: items.length,
               itemBuilder: (context, index) =>
-                  themes.items(context, items[index]),
+                  themes.items(context,index, items[index]),
             ),
           ),
         ),

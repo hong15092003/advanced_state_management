@@ -1,12 +1,16 @@
+import 'package:advanced_state_management/controllers/home_controller.dart';
+import 'package:flutter/material.dart';
+
 import 'package:advanced_state_management/components/style.dart';
 import 'package:advanced_state_management/models/item_model.dart';
 import 'package:advanced_state_management/views/edit_view.dart';
-import 'package:flutter/material.dart';
 
 class DetailView extends StatelessWidget {
+  final int index;
   final ItemModel item;
   const DetailView({
     super.key,
+    required this.index,
     required this.item,
   });
 
@@ -26,6 +30,7 @@ class DetailView extends StatelessWidget {
                 showModalBottomSheet<String?>(
                   context: context,
                   builder: (context) => EditView(
+                    index: index,
                     item: item,
                   ),
                 );
@@ -35,11 +40,14 @@ class DetailView extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Column(
-          children: [
-            themes.items(null, item),
-            themes.desrciption(item),
-          ],
+        child: ListenableBuilder(
+          listenable: homeController,
+          builder: (context, child) => Column(
+            children: [
+              themes.items(null, index, item),
+              themes.desrciption(item),
+            ],
+          ),
         ),
       ),
     );

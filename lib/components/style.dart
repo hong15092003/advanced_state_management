@@ -1,3 +1,4 @@
+import 'package:advanced_state_management/controllers/home_controller.dart';
 import 'package:advanced_state_management/models/item_model.dart';
 import 'package:advanced_state_management/views/detail_view.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +55,7 @@ class Themes {
     );
   }
 
-  Container items(BuildContext? context, ItemModel items) {
+  Container items(BuildContext? context, int index, ItemModel items) {
     return boxContainer(
       ListTile(
           onTap: context != null
@@ -62,7 +63,8 @@ class Themes {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => DetailView(item: items),
+                      builder: (context) =>
+                          DetailView(index: index, item: items),
                     ),
                   );
                 }
@@ -73,7 +75,7 @@ class Themes {
             icon: icon.delete,
             color: color.secondaryColor,
             onPressed: () {
-              print('Edit');
+              homeController.delete(items);
             },
           )),
     );
